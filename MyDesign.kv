@@ -1,0 +1,540 @@
+#:import ghex kivy.utils.get_color_from_hex
+
+MainWidget :
+    canvas.before :
+        Color :
+            rgba : ghex('FFe7e7')
+        Rectangle:
+            pos : self.pos
+            size : self.size
+
+<ExitApplication> :
+	auto_dismiss : False
+	background_color : 0 , 0 , 0 , 0
+	size_hint : 0.8 , 0.4
+	overlay_color : 0 , 0 ,0 , .4
+	
+	BoxLayout :
+		orientation : "vertical"
+		
+		canvas.before :
+			Color :
+				rgba : ghex("d7e5ec")
+			RoundedRectangle:
+				pos : self.pos
+				size : self.size
+				radius : [20,]
+				
+		Label:
+			size_hint : 1 , 0.7
+			text_size : self.width - dp(10) , None
+			height : self.texture_size[1]
+			halign : "center"
+			color : 0 , 0 , 0 ,1
+			font_name : "cupid.ttf"
+			text : "Thank you for using My Osmeñian and we wish you enjoy using our application. Do you want to exit My Osmeñian ?"
+			font_size : sp(25)
+		
+		BoxLayout :
+			size_hint : 1 , 0.3
+			
+			Gender :
+				background_color : 0 , 0 , 0 , 0
+				markup : True
+				text : "NO"
+				font_name : "cupid.ttf"
+				color : 0 , 0, 0 , 1
+				font_size : sp(30)
+				
+				on_release :
+					root.dismiss()
+					
+			Gender :
+				background_color : 0 , 0 , 0 , 0
+				markup : True
+				text : "YES"
+				font_name : "cupid.ttf"
+				color : 0 , 0, 0 , 1
+				font_size : sp(30)
+				
+				on_release :
+					app.stop()
+
+<Penalized> :
+	mytime : mytime.__self__
+	auto_dismiss : False
+	background_color : 0 , 0 , 0 , 0
+	size_hint : 0.8 , 0.4
+	overlay_color : 0 , 0 ,0 , .4
+	
+	BoxLayout :
+		orientation : "vertical"
+		
+		canvas.before :
+			Color :
+				rgba : ghex("d7e5ec")
+			RoundedRectangle:
+				pos : self.pos
+				size : self.size
+				radius : [20,]
+				
+		Label:
+			size_hint : 1 , 0.7
+			text_size : self.width - dp(10) , None
+			height : self.texture_size[1]
+			halign : "center"
+			color : 0 , 0 , 0 ,1
+			font_name : "cupid.ttf"
+			text : "Please Don't Leave The App When You Are In Finding , Because There Are People Who's Waiting For You "
+			font_size : sp(25)
+			
+		Label:
+			id : mytime
+			size_hint : 1 , 0.3
+			text_size : self.width - dp(10) , None
+			height : self.texture_size[1]
+			halign : "center"
+			color : 0 , 0 , 0 ,1
+			font_name : "cupid.ttf"
+			text : f"Penalized : {root.second}s"
+			font_size : sp(30)
+			
+# ==== > Screen 1
+<FindingPartner> :
+	addr : addr.__self__
+	port : port.__self__
+	
+	canvas.before :
+		Rectangle :
+			pos : self.pos
+			size : self.size
+			source : "cupid.jpeg"
+	
+	FloatLayout :
+		
+		# ------> IP Widget
+		GridLayout :
+			size_hint : 0.5 , None
+			height : 180
+			pos_hint : {"x" : 0.45 , "top" : .98}
+			rows : 2
+			cols : 2
+			padding : dp(3)
+			spacing : dp(3)
+			
+			canvas.before :
+				Color :
+					rgb : ghex("d7e5ec")
+					a : 0.8
+				RoundedRectangle :
+					pos : self.pos
+					size : self.size
+					radius : (20,)
+			
+			Label :
+				size_hint : 0.3 , 1
+				markup : True
+				text : "ADDR :"
+				color : 0 , 0 , 0 ,1
+				font_name : "cupid.ttf"
+			TextInput :
+				size_hint : 0.7 , 1
+				multiline : False
+				background_color : ghex("d7e5ec")
+				background_down : ""
+				font_size : sp(15)
+				id : addr
+				text : "localhost"
+				#text : "localhost"
+			Label :
+				size_hint : 0.3 , 1
+				text : "PORT :"
+				color : 0 , 0 , 0 ,1
+				font_name : "cupid.ttf"
+			TextInput :
+				size_hint : 0.7 , 1
+				multiline : False
+				padding_x : 2
+				background_color : ghex("d7e5ec")
+				background_down : ""
+				font_size : sp(15)
+				id : port
+				text : "4567"
+		
+		# ------> App Name Widget
+		Label :
+			size_hint : 0.9 , 0.3
+			pos_hint : { "center_x" : 0.5 , "center_y" : 0.70 }
+			markup : True
+			font_name : "cupid.ttf"
+			text : "My Osmenian"
+			color : ghex("bac4cf")
+			#color : 0 , 0, 0 , 1
+			font_size : sp(80)
+		
+		Label :
+			size_hint : 0.9 , 0.3
+			pos_hint : { "center_x" : 0.5 , "center_y" : 0.70 }
+			markup : True
+			font_name : "cupid.ttf"
+			text : "My Osmenian"
+			#color : ghex("bac4cf")
+			color : 0 , 0, 0 , 1
+			font_size : sp(83)
+		
+		# ------> Gender Button Widget
+		BoxLayout :
+			size_hint : 0.60 , 0.08
+			pos_hint : { "center_x" : 0.5 , "center_y" : 0.5 }
+			padding : dp(10)
+			spacing : dp(10)
+			
+			canvas.before :
+				Color :
+					rgb : ghex("d7e5ec")
+					a : 0.4
+				RoundedRectangle :
+					pos : self.pos
+					size : self.size
+					radius : [20 ,]
+
+			Gender :
+				background_color : 0 , 0 , 0 , 0
+				markup : True
+				text : "FEMALE"
+				font_name : "cupid.ttf"
+				color : 0 , 0, 0 , 1
+				font_size : sp(30)
+				
+				on_release :
+					root.gender = "F"
+			
+			Gender :
+				background_color : 0 , 0 , 0 , 0
+				markup : True
+				text : "MALE"
+				font_name : "cupid.ttf"
+				color : 0 , 0, 0 , 1
+				font_size : sp(30)
+				
+				on_release :
+					root.gender = "M"
+
+		# ------> Questions Button Widget
+		BoxLayout :
+			size_hint : 0.8 , 0.1
+			pos_hint : { "center_x" : 0.5 , "center_y" : 0.38 }
+			padding : dp(10)
+			spacing : dp(10)
+			
+			canvas.before :
+				Color :
+					rgb : ghex("d7e5ec")
+					a : 0.4
+				RoundedRectangle :
+					pos : self.pos
+					size : self.size
+					radius : [20 ,]
+			
+			Question :
+				background_color : 0 , 0 , 0 , 0
+				markup : True
+				text : "FRIEND"
+				font_name : "cupid.ttf"
+				color : 0 , 0, 0 , 1
+				font_size : sp(35)
+				
+				on_release :
+					root.question = "friend"
+			
+			Question :
+				background_color : 0 , 0 , 0 , 0
+				markup : True
+				text : "LOVE"
+				font_name : "cupid.ttf"
+				color : 0 , 0, 0 , 1
+				font_size : sp(35)
+				
+				on_release :
+					root.question = "love"
+			
+			Question :
+				background_color : 0 , 0 , 0 , 0
+				markup : True
+				text : "TALK"
+				font_name : "cupid.ttf"
+				color : 0 , 0, 0 , 1
+				font_size : sp(35)
+				
+				on_release :
+					root.question = "talk"
+
+		# ------> Information Label Widget
+		ScrollView :
+			size_hint : 0.9 , 0.2
+			pos_hint : { "center_x" : 0.5 , "center_y" : 0.20 }
+			padding : dp(10)
+			
+			Information :
+				size_hint : 1 , None
+				text_size : self.width - dp(10) , None
+				height : self.texture_size[1]
+				font_name : "cupid.ttf"
+				font_size : sp(21)
+				color : 0 , 0 , 0 , 1
+				
+				canvas.before :
+					Color :
+						rgb : ghex("d7e5ec")
+						a : 0.4
+					RoundedRectangle :
+						pos : self.pos
+						size : self.size
+						radius : (20,)
+				
+				
+<ConfirmSelected> :
+	info : info.__self__
+	auto_dismiss : False
+	background_color : 0 , 0 , 0 , 0
+	size_hint : 0.8 , 0.4
+	overlay_color : 0 , 0 ,0 , .4
+	
+	BoxLayout :
+		orientation : "vertical"
+		
+		canvas.before :
+			Color :
+				rgba : ghex("d7e5ec")
+			RoundedRectangle:
+				pos : self.pos
+				size : self.size
+				radius : [20,]
+		
+		Label :
+			id : info
+			background_color : 0 , 0 , 0 , 0
+			markup : True
+			font_name : "cupid.ttf"
+			color : 0 , 0, 0 , 1
+			font_size : sp(60)
+		
+		BoxLayout :
+			Gender :
+				background_color : 0 , 0 , 0 , 0
+				markup : True
+				text : "CANCEL"
+				font_name : "cupid.ttf"
+				color : 0 , 0, 0 , 1
+				font_size : sp(35)
+				
+				on_release :
+					root.dismiss()
+					
+			Gender :
+				background_color : 0 , 0 , 0 , 0
+				markup : True
+				text : "CONTINUE"
+				font_name : "cupid.ttf"
+				color : 0 , 0, 0 , 1
+				font_size : sp(35)
+				
+				on_release :
+					root.isProcced = True
+
+<AnimateFinding>:
+	mytext : mytext.__self__
+	auto_dismiss : False
+	background_color : 0 , 0 , 0 , 0
+	size_hint : 0.8 , 0.2
+	overlay_color : 0 , 0 ,0 , .4
+	
+	BoxLayout :
+		canvas.before :
+			Color :
+				rgba : ghex("d7e5ec")
+			RoundedRectangle:
+				pos : self.pos
+				size : self.size
+				radius : [20,]
+		
+		Label :
+			id : mytext
+			background_color : 0 , 0 , 0 , 0
+			markup : True
+			font_name : "cupid.ttf"
+			color : 0 , 0, 0 , 1
+			font_size : sp(60)
+			text : "Finding"
+
+#====> Screen 2
+<TalkingPartner> :
+	mytime : mytime.__self__
+	nickname : nickname.__self__
+	questions : questions.__self__
+	place : place.__self__
+	qoute : qoute.__self__
+	back : back.__self__
+	
+	canvas.before :
+		Rectangle :
+			pos : self.pos
+			size : self.size
+			source : "cupid.jpeg"
+	
+	FloatLayout :
+		
+		# ------> Questions Widget
+		Label :
+			pos_hint : {"top" : 0.999 , "x" : 0.1 }
+			size_hint : 0.2 , 0.1
+			background_color : 0 , 0 , 0 , 0
+			markup : True
+			text : "Questions :"
+			font_name : "cupid.ttf"
+			color : 0 , 0, 0 , 1
+			font_size : sp(35)
+		
+		ScrollView :
+			size_hint : 0.9 , 0.2
+			pos_hint : { "center_x" : 0.5 , "top" : 0.9 }
+			padding : dp(10)
+			
+			ListOfQuestions :
+				id : questions
+				size_hint : 1 , None
+				text_size : self.width , None
+				height : self.texture_size[1]
+				padding: dp(8) , dp(8)
+				font_name : "cupid.ttf"
+				font_size : sp(22)
+				color : 0 , 0 , 0 , 1
+				
+				canvas.before :
+					Color :
+						rgba : ghex("d7e5ec")
+					RoundedRectangle :
+						pos : self.pos
+						size : self.size
+						radius : (20,)
+			
+		
+		# ------> Time Widget
+		Label :
+			id : mytime
+			pos_hint : {"top" : 0.999 , "right" : 0.9 }
+			size_hint : 0.2 , 0.1
+			background_color : 0 , 0 , 0 , 0
+			markup : True
+			text : "Time : 120s"
+			font_name : "cupid.ttf"
+			color : 0 , 0, 0 , 1
+			font_size : sp(35)
+		
+		# ------> Location Widget
+		Label :
+			pos_hint : {"top" : 0.7 , "x" : 0.1 }
+			size_hint : 0.2 , 0.1
+			background_color : 0 , 0 , 0 , 0
+			markup : True
+			text : "Location :"
+			font_name : "cupid.ttf"
+			color : 0 , 0, 0 , 1
+			font_size : sp(35)
+			
+		Image :
+			id : place
+			source : ""
+			size_hint : 0.8 , 0.3
+			pos_hint : {"top" : 0.6 , "x" : 0.1 }
+			allow_stretch : True
+			keep_ratio : False
+		
+		# ------> Nickname Widget
+		Label :
+			id : nickname
+			pos_hint : {"center_x" : 0.5 , "top" : 0.25}
+			background_color : 0 , 0 , 0 , 0
+			size_hint : 0.8 , None
+			text_size : self.width - dp(10) , None
+			height : self.texture_size[1]
+			halign : "center"
+			markup : True
+			text : "Philo finding Sophy"
+			font_name : "cupid.ttf"
+			color : 0 , 0, 0 , 1
+			font_size : sp(35)
+			
+		# ------> Qoute Widget
+		ScrollView :
+			size_hint : 0.9 , 0.1
+			pos_hint : {"center_x" : 0.5 , "top" : 0.19}
+			padding : dp(10)
+			
+			Label :
+				id : qoute
+				size_hint : 1 , None
+				text_size : self.width - dp(10) , None
+				height : self.texture_size[1]
+				font_name : "cupid.ttf"
+				font_size : sp(25)
+				color : 0 , 0 , 0 , 1
+				markup : True
+				halign : "center"
+				text : "\" Live Every Moment Of Your Life And Meet Someone New \""
+				#text : "‎When you meet anyone, treat the event as a holy encounter. It's through others that we either find or love our self. For you see, nothing is accomplished without others. When you eliminate the concept of separation from your thoughts and your behavior, you begin to feel your connection to everything and everyone."
+				font_name : "cupid.ttf"
+				
+	
+		# ------> Back Button Widget
+		BackButton :
+			id : back
+			disabled : True
+			opacity : 0
+			pos_hint : {"x" : 0.01 , "y" : 0.01}
+			background_color : 0 , 0 , 0 , 0
+			size_hint : 0.2 , None
+			text_size : self.width - dp(10) , None
+			height : self.texture_size[1]
+			halign : "center"
+			markup : True
+			text : "BACK"
+			font_name : "cupid.ttf"
+			color : 0 , 0, 0 , 1
+			font_size : sp(25) 
+			
+			on_release:
+				root.manager.current = "screen1"
+
+<OkeyToBack>:
+	auto_dismiss : True
+	background_color : 0 , 0 , 0 , 0
+	size_hint : 0.8 , 0.4
+	overlay_color : 0 , 0 ,0 , .4
+	
+	BoxLayout :
+		orientation : "vertical"
+		
+		canvas.before :
+			Color :
+				rgba : ghex("d7e5ec")
+			RoundedRectangle:
+				pos : self.pos
+				size : self.size
+				radius : [20,]
+		
+		Label:
+			text_size : self.width - dp(10) , None
+			height : self.texture_size[1]
+			halign : "center"
+			text :
+				"Time Is Up! \n\n" + \
+				"You Can Go Back To Home Screen Now \n\n" + \
+				" We Wish You Had Enjoy Using This App And " + \
+				"You Can Visit The Junior Programming Club If You Have Any Concern " + \
+				",Have A Good Day :>\n"
+			markup : True
+			font_name : "cupid.ttf"
+			color : 0 , 0, 0 , 1
+			font_size : sp(25) 
+		
