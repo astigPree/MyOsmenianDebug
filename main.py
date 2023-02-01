@@ -318,6 +318,7 @@ class MainWidget(ScreenManager) :
 	server_data : dict = {}
 
 	sound = None  # object holding the sound of the app
+	sound_stop = False
 	
 	def __init__(self , **kwargs) :
 		super(MainWidget , self).__init__(**kwargs)
@@ -362,14 +363,29 @@ class MainWidget(ScreenManager) :
 			self.sound.loop = True
 			self.sound.volume = .5
 			self.sound.play()
-
+	
+	def stopPlayingMusic(self , *args):
+		if self.sound and not self.sound_stop:
+			self.sound.stop()
+			self.sound_stop = True
+	
+	def rePlayMusic(self , *args):
+		if self.sound and self.sound_stop:
+			self.sound.play()
+			self.sound_stop = False 
+		
 
 # ====> App
 class MyOsmenianApp(App) :
 	
 	def on_pause(self) :
+		self.root.stopPlayingMusic()
 		Clock.schedule_interval(self.root.get_screen("screen2").reduceMyTime , 1)
-		
+		return True
+	
+	def on_resume(self):
+		self.root.rePlayMusic()		
+			
 	def on_stop(self) :
 		self.root.appData.save_data()
 	
